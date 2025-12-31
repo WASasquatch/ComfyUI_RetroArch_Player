@@ -9,7 +9,7 @@ class ComfyRetroArchPlayer:
     RETURN_TYPES = ()
     OUTPUT_NODE = True
     FUNCTION = "run"
-    CATEGORY = "fun"
+    CATEGORY = "WAS/Play"
 
     def run(self):
         return ()

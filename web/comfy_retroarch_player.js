@@ -93,7 +93,7 @@ function getContainer() {
   el.style.width = "0";
   el.style.height = "0";
   el.style.pointerEvents = "none";
-  el.style.zIndex = "1000";
+  el.style.zIndex = "100";
   document.body.appendChild(el);
   STATE.container = el;
   return el;
@@ -110,7 +110,7 @@ function ensureIframeForNode(node) {
   const iframe = document.createElement("iframe");
   iframe.setAttribute(
     "sandbox",
-    "allow-scripts allow-same-origin allow-forms allow-popups allow-downloads allow-pointer-lock"
+    "allow-scripts allow-forms allow-popups allow-downloads allow-pointer-lock"
   );
   iframe.style.position = "absolute";
   iframe.style.border = "0";
@@ -183,8 +183,10 @@ function updateIframeRect(node, iframe) {
 
   iframe.style.left = `${Math.round(nx)}px`;
   iframe.style.top = `${Math.round(ny)}px`;
-  iframe.style.width = `${Math.max(0, Math.round(nw))}px`;
-  iframe.style.height = `${Math.max(0, Math.round(nh))}px`;
+  iframe.style.width = `${Math.max(0, Math.round(nw / scale))}px`;
+  iframe.style.height = `${Math.max(0, Math.round(nh / scale))}px`;
+  iframe.style.transform = `scale(${scale})`;
+  iframe.style.transformOrigin = 'top left';
 
   const isCollapsed = !!node.flags?.collapsed;
   const hasArea = nw >= 2 && nh >= 2;
